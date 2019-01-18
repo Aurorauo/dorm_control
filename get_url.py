@@ -12,6 +12,7 @@ from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText  
 import smtplib
 
+'''用来发送邮件的一个类'''
 class send():
     def __init__(self,fro,psd,to,serve,subject,content):
        self.msg_from=fro                                #发送方邮箱
@@ -30,7 +31,8 @@ class send():
        self.s.login(self.msg_from, self.passwd)
        self.s.sendmail(self.msg_from, self.msg_to, self.msg.as_string())
        self.s.quit()
-       
+ 
+'''爬虫，用来获取新的网址，并发送到邮箱'''
 def cploar():
     browser = webdriver.Chrome(executable_path=r'C:\chromedriver\chromedriver.exe')
     browser.get('https://dashboard.cpolar.com/login')
