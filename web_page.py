@@ -58,9 +58,21 @@ def data():
 def plot_data():
     data=xlrd.open_workbook('data.xls')
     table=data.sheets()[0]
-    T=table.col_values(1)[1:]
-    t=table.col_values(0)[1:]
-    plot(1,t,T,"temp trend figure",'time  [interval:5 min]','temp')
+    TT=table.col_values(1)[1:]
+    tt=table.col_values(0)[1:]
+    date=table.col_values(2)[1:]
+    T=[]
+    t=[]
+    d=[]
+    n=0
+    for i in date:
+        if str(i)[:10]==str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))[:10]:
+            T.append(TT[n])
+            t.append(tt[n])
+            d.append(i[11:-3])
+        n=n+1
+    xlabel='time  [interval > 2 min   start time > '+str(d[0])+']'
+    plot(1,t,T,"temperature trend figure",xlabel,'temperature [ degree Celsius ]')
     text='''<html>
     <head>
         <title></title>
@@ -75,8 +87,8 @@ def plot_data():
     </head>
     <body>
         <center>
-        <h2><a href="/login">欢迎登录寝室网络管理平台</a></h2><br/><br/><p><font size="4"> 寝室内温度变化趋势图</font>'''
-    text=text+'''<img src="/images/temp.png" width="100%" height="100%"/></center>'''
+        <h2><a href="/login"><center>欢迎登录寝室网络管理平台</center></a></h2><br/><br/><p><font size="4"> <center>寝室内温度变化趋势图</center></font>'''
+    text=text+'''<center><img src="/images/temp.png" width="100%" /></center></center>'''
     text=text+'''
     </body>
 </html>'''
@@ -129,7 +141,7 @@ def plot_data():
     except:
         pass
     try:
-        if (name==u'zf' and psd==u'****') or led:
+        if (name==u'zf' and psd==u'hfutzf') or led:
             page='''<html>
     <head>
         <title>寝室网络管理平台</title>
@@ -162,7 +174,7 @@ def plot_data():
         
             <form  method="post" accept-charset="utf-8">
                 <p>LED开关按钮:&nbsp;&nbsp;<input type="Submit" value="ON" name="led" style='background-color:green'/> &nbsp;&nbsp;&nbsp;<input type="Submit" value="OFF" name="led" style='background-color:red'/></p> 
-               <br/><br/><br/><p><font size="4"> 寝室内温度变化趋势图</font><br/>  <img src="/images/temp.png" width="100%" height="100%"/>
+               <br/><br/><br/><center><p><font size="4"> 寝室内温度变化趋势图</font><br/>  <img src="/images/temp.png" width="100%"/></p></center>
             </form>
         </center>
         </center>
