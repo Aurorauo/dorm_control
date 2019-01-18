@@ -61,7 +61,7 @@ while 1:
                 text=text+'\n\n\n  【备注：由程序自动编写和发送，勿回复！！！】'
             else:
                 text='您好：\n\n   您并未开启任何隧道服务，请开通一个至少隧道！！\n\n\n  【备注：由程序自动编写和发送，勿回复！！！】'
-            send('codetest@126.com','hfutzf083415','1379875051@qq.com',"smtp.126.com",'cploar更换网址快讯',text)  
+            send('codetest@126.com','********','1379875051@qq.com',"smtp.126.com",'cploar更换网址快讯',text)  
             time.sleep(60)
     except:
         pass
