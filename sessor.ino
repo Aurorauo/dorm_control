@@ -1,11 +1,12 @@
 #include <OneWire.h>
 #include <DS18B20.h>
-// 1-Wire devices connected to digital pin 2 on the Arduino.
-int temp=7;
+
+int temp=7; //温度传感器所接引脚号
 DS18B20 ds(temp);
+
 void setup() {
-  pinMode(13,OUTPUT);  //测试
-  Serial.begin(9600);
+  pinMode(13,OUTPUT);  //测试LED
+  Serial.begin(9600);//设置波特率
 }
 
 void loop()
@@ -20,7 +21,7 @@ void loop()
             {
               digitalWrite(13,HIGH);
             }
-            if(gain=='m')
+            if(gain=='m')//获取LED引脚电平信号
             {
               boolean ledState=digitalRead(13);
               Serial.println(ledState);
@@ -28,12 +29,7 @@ void loop()
             }
              if(gain=='t')//温度传感器
             {
-                 // Tell every device to start a temperature conversion.
                 ds.doConversion();
-  
-                 // Print alarm values and current temperature for every device with an active alarm condition.
- 
-                // Print current temperature to verify that it is still either < LOW_ALARM or > HIGH_ALARM.
                 Serial.println(ds.getTempC());
             }
 
