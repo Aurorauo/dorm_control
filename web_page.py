@@ -42,7 +42,8 @@ def plot(num,xdata,ydata,title,xlabel,ylabel,grid=True):
     pylab.plot(xdata,ydata,'r.')#标出相关的点
     pylab.grid(grid)#网格生效
     pylab.savefig('images/temp.png')  #图片保存位置
-    
+  
+'''测试网页页面'''
 @bottle.route('/dorm', method='GET')
 def dorm():
     ser.write('t')
@@ -56,6 +57,7 @@ def dorm():
     <body>'''
     return page+'''<center><h1><font size="12" color="red">寝室实时温度为>>'''+str(temp)+'''摄氏度</font></h1></center></body></html>'''
 
+'''温度变化趋势图及绘制图表页面'''
 @bottle.route('/temp', method='GET')
 def temp():
     data=xlrd.open_workbook('data.xls')
@@ -101,6 +103,7 @@ def server_static(filename):
     """定义/assets/下的静态(css,js,图片)资源路径"""
     return static_file(filename, root='./images')
 
+'''网站登陆页面'''
 @bottle.route('/login', method='GET')
 def login():
     page='''<html>
@@ -129,6 +132,8 @@ def login():
 </html>
 '''
     return page
+
+'''登陆进入后的页面'''
 @bottle.route('/login', method='POST')
 def login():
     name=bottle.request.forms.get('name')
@@ -189,6 +194,7 @@ def login():
     except:
         return '''<h1>some error occurs</h1>'''
 
+'''死循环，每隔两分钟读取一次温度传感器的数值，并保存到数据库中'''
 def monitor():
     while 1:
         t=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -225,7 +231,8 @@ def monitor():
 threads = []
 gg = threading.Thread(target=monitor)                      
 threads.append(gg)
-                    
+
+'''主函数，有多个线程在运行'''                    
 if __name__ == '__main__':
     for i in threads:
         i.start()
