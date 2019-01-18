@@ -31,6 +31,8 @@ def get_content(url):
     r=requests.get(url,headers=header)
     r.encoding=r.apparent_encoding
     return r.content
+
+'''绘制图表函数'''
 def plot(num,xdata,ydata,title,xlabel,ylabel,grid=True):
     pylab.figure(num)
     pylab.title(title,fontsize=20)  #图表的名称
@@ -42,7 +44,7 @@ def plot(num,xdata,ydata,title,xlabel,ylabel,grid=True):
     pylab.savefig('images/temp.png')  #图片保存位置
     
 @bottle.route('/dorm', method='GET')
-def data():
+def dorm():
     ser.write('t')
     temp=ser.readline()
     page='''<!doctype html>
@@ -55,7 +57,7 @@ def data():
     return page+'''<center><h1><font size="12" color="red">寝室实时温度为>>'''+str(temp)+'''摄氏度</font></h1></center></body></html>'''
 
 @bottle.route('/temp', method='GET')
-def plot_data():
+def temp():
     data=xlrd.open_workbook('data.xls')
     table=data.sheets()[0]
     TT=table.col_values(1)[1:]
@@ -100,7 +102,7 @@ def server_static(filename):
     return static_file(filename, root='./images')
 
 @bottle.route('/login', method='GET')
-def plot_data():
+def login():
     page='''<html>
     <head>
         <title></title>
@@ -128,7 +130,7 @@ def plot_data():
 '''
     return page
 @bottle.route('/login', method='POST')
-def plot_data():
+def login():
     name=bottle.request.forms.get('name')
     psd=bottle.request.forms.get('pwd')
     t=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
