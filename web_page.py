@@ -98,6 +98,7 @@ def temp():
 </html>'''
     return text
     
+'''静态文件位置'''
 @bottle.route('/images/<filename:re:.*\.css|.*\.js|.*\.png|.*\.jpg|.*\.gif>', method='GET')
 def server_static(filename):
     """定义/assets/下的静态(css,js,图片)资源路径"""
