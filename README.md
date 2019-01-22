@@ -1,4 +1,4 @@
-# dorm_control
+### dorm_control
 通过网页对寝室电器设备进行控制
 
 1、用到的硬件有：树莓派3B+、arduino uno、TTL转串口、温度传感器、其他辅助件（面包板、排线等）
